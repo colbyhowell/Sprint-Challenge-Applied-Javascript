@@ -24,7 +24,7 @@ axios
     .get('https://lambda-times-backend.herokuapp.com/articles')
     .then(data => {
             Object.entries(data.data.articles)
-            .forEach(([key, value]) => {
+            .forEach(([key]) => {
                 var newArr = data.data.articles[key];
                 console.log(newArr)
                 const arrayArticles =
@@ -57,7 +57,7 @@ axios
         articleImgContainer.classList.add('img-container')
 
         i = 0
-
+        
         articleHeadline.textContent =
          data[i].headline
         articleImgLink.src =
