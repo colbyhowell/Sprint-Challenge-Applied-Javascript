@@ -23,9 +23,10 @@ const cardContainer = document.querySelector('.cards-container')
 axios
     .get('https://lambda-times-backend.herokuapp.com/articles')
     .then(data => {
-            Object.keys(data.data.articles)
-            .forEach(key => {
+            Object.entries(data.data.articles)
+            .forEach(([key, value]) => {
                 var newArr = data.data.articles[key];
+                console.log(newArr)
                 const arrayArticles =
                 articleCreator(newArr)
                 cardContainer.appendChild(arrayArticles)
@@ -46,10 +47,9 @@ axios
         const articleImgContainer = 
         document.createElement('div')
         const articleImgLink = 
-        document.createElement('a')
+        document.createElement('img')
         const articleAuthorName = 
         document.createElement('span')
-
 
         article.classList.add('card')
         articleHeadline.classList.add('headline')
@@ -60,7 +60,7 @@ axios
 
         articleHeadline.textContent =
          data[i].headline
-        articleImgLink.href =
+        articleImgLink.src =
          data[i].authorPhoto
         articleAuthorName.textContent =
          data[i].authorName
