@@ -23,14 +23,15 @@ const cardContainer = document.querySelector('.cards-container')
 axios
     .get('https://lambda-times-backend.herokuapp.com/articles')
     .then(data => {
-        const articleFeed = data.data.articles
-        console.log(articleFeed)
-        articleFeed.forEach(data => {
-            const allArticles = articleCreator(data)
-            console.log(allArticles)
-            cardContainer.appendChild(allArticles)
+            Object.keys(data.data.articles)
+            .forEach(key => {
+                var newArr = data.data.articles[key];
+                const arrayArticles =
+                articleCreator(newArr)
+                cardContainer.appendChild(arrayArticles)
+            })
+
         })
-    })
     .catch(error => {
         console.log('There was an error with your articles', error)
     })
@@ -45,7 +46,7 @@ axios
         const articleImgContainer = 
         document.createElement('div')
         const articleImgLink = 
-        document.createElement('img')
+        document.createElement('a')
         const articleAuthorName = 
         document.createElement('span')
 
@@ -55,12 +56,14 @@ axios
         articleAuthor.classList.add('author')
         articleImgContainer.classList.add('img-container')
 
+        i = 0
+
         articleHeadline.textContent =
-         data.articles.headline
-        articleImgLink.html =
-         data.articles.authorPhoto
+         data[i].headline
+        articleImgLink.href =
+         data[i].authorPhoto
         articleAuthorName.textContent =
-         data.articles.authorName
+         data[i].authorName
 
         article.appendChild(articleHeadline)
         article.appendChild(articleAuthor)
