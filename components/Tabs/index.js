@@ -12,12 +12,12 @@ const appendedTopics = document.querySelector('.topics')
 axios
     .get('https://lambda-times-backend.herokuapp.com/topics')
     .then(data => {
-        console.log(data)
         const topicFeed = data.data.topics
             
         topicFeed.forEach(data => {
             const newFeeds = tabCreator(data)
 
+            appendedTopics.appendChild(newFeeds)
         })
     })
     .catch(error => {
@@ -31,5 +31,5 @@ axios
 
         newTabs.textContent = data
 
-        appendedTopics.appendChild(newTabs)
+        return newTabs
     }
